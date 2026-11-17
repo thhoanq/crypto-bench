@@ -1,0 +1,36 @@
+# Xoodyak (Lab tự viết) — AEAD + Hash, mỗi lệnh xử lý tối đa 1 khối AD + 1 khối dữ liệu.
+name   = "Xoodyak"
+config = "AEAD + Hash, 1 round/chu kỳ"
+group  = "A"
+owner  = "Kim"
+
+[rtl]
+root  = "../../../Crypto-Hardware/xoodyak"
+files = ["*.v"]
+top   = "xoodyakcore"
+clock = "clk"
+
+[impl]
+period = 8.0
+
+[sim]
+files = ["tb_bench.v"]
+data  = ["vectors.hex"]      # sinh bằng gen_vectors.py (mô hình Python độc lập)
+
+[[op]]
+key = "enc"
+name = "Mã hóa xác thực"
+block_bits = 128
+notes = "16 byte AD + 16 byte PT mỗi lệnh; block_bits tính trên plaintext"
+
+[[op]]
+key = "dec"
+name = "Giải mã xác thực"
+block_bits = 128
+notes = "16 byte AD + 16 byte CT mỗi lệnh; LỖI RTL: giải mã sai tag khi data_length không chia hết cho 4 (KAT bỏ qua các vector đó)"
+
+[[op]]
+key = "hash"
+name = "Băm"
+block_bits = 128
+notes = "thông điệp 16 byte, digest 256 bit"

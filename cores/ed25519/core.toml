@@ -1,0 +1,32 @@
+# Ed25519 sign (dqi/ed25519_fpga, Lab sửa) — bản đã gộp file ở crypto_analyse/ed25519.
+# Đo ở biên sign_core (không kèm wrapper MMIO ed25519_sign).
+#
+# TÌNH TRẠNG (17/11/2026): CHƯA ĐO ĐƯỢC. `bench.py sim ed25519` treo trong Icarus:
+# thời gian mô phỏng dừng ở sườn clk thứ hai sau core_ena (core_state_reg = 1,
+# STATE_HASH_KEY) — vòng lặp không trễ đâu đó trong đường sha512_wrap/sha512_core.
+# Chưa tìm ra vị trí chính xác; chưa chạy impl. Testbench, vector (đã đối chiếu
+# OpenSSL) và mô hình MULT_MACRO đã sẵn, gỡ được treo là đo được.
+name   = "Ed25519"
+config = "Sign, thông điệp 256 bit"
+group  = "B"            # B = latency: mỗi phép toán một dòng, ghi trung bình/min/max
+owner  = "Hoàng"
+
+[rtl]
+root  = "../../../crypto_analyse/ed25519"
+files = ["ed25519_sign_core.v", "mult_units_512.v", "precomp_rom.v",
+         "bram_253.v", "bram_255.v", "bram_256.v", "bram_512.v"]
+data  = ["x_precomp.dat", "y_precomp.dat", "t_precomp.dat"]   # $readmemh trong precomp_rom
+top   = "sign_core"
+clock = "clk"
+
+[impl]
+period = 20.0           # README gốc: 50 MHz
+
+[sim]
+files = ["tb_bench.v", "mult_macro_sim.v"]   # mult_macro_sim.v: mô hình sim của MULT_MACRO (Xilinx)
+data  = ["vectors.hex"]      # gen_vectors.py 32 --check (đối chiếu OpenSSL)
+
+[[op]]
+key = "sign"
+name = "Ký"
+notes = "32 vector ngẫu nhiên (seed 25519), đối chiếu OpenSSL"

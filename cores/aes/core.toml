@@ -1,0 +1,45 @@
+# AES (secworks, Lab sửa) — đo ở biên aes_core (không kèm wrapper MMIO).
+name   = "AES"
+config = "AES 128/256, Enc + Dec"
+group  = "A"            # A = throughput (mã khối, AEAD, hash, MAC) | B = latency (chữ ký, KEM)
+owner  = "Hoàng"
+notes  = "đo ở aes_core, không tính key expansion"
+
+[rtl]
+root  = "../../../Crypto-Hardware/aes"
+files = ["aes_core.v", "aes_encipher_block.v", "aes_decipher_block.v",
+         "aes_key_mem.v", "aes_sbox.v", "aes_inv_sbox.v"]
+top   = "aes_core"
+clock = "clk"
+
+[impl]
+period = 8.0            # chu kỳ khởi đầu khi dò Fmax (ns)
+
+[sim]
+files = ["tb_bench.v"]
+top   = "tb_bench"
+
+# Mỗi [[op]] = một dòng trên sheet. key phải trùng tên op trong probe.run_begin().
+[[op]]
+key = "enc128"
+name = "Mã hóa"
+config = "AES-128"
+block_bits = 128
+
+[[op]]
+key = "dec128"
+name = "Giải mã"
+config = "AES-128"
+block_bits = 128
+
+[[op]]
+key = "enc256"
+name = "Mã hóa"
+config = "AES-256"
+block_bits = 128
+
+[[op]]
+key = "dec256"
+name = "Giải mã"
+config = "AES-256"
+block_bits = 128

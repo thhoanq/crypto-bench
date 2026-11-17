@@ -1,0 +1,155 @@
+{
+ "core": "aes",
+ "pass": true,
+ "fails": [],
+ "simulator": "iverilog",
+ "date": "2026-11-17",
+ "ops": {
+  "enc128": {
+   "runs": 9,
+   "lat_mean": 53.0,
+   "lat_min": 53,
+   "lat_max": 53,
+   "latency": 53,
+   "stream_n": 8,
+   "stream_cpb": 53.0,
+   "ii": 53
+  },
+  "dec128": {
+   "runs": 9,
+   "lat_mean": 53.0,
+   "lat_min": 53,
+   "lat_max": 53,
+   "latency": 53,
+   "stream_n": 8,
+   "stream_cpb": 53.0,
+   "ii": 53
+  },
+  "enc256": {
+   "runs": 9,
+   "lat_mean": 73.0,
+   "lat_min": 73,
+   "lat_max": 73,
+   "latency": 73,
+   "stream_n": 8,
+   "stream_cpb": 73.0,
+   "ii": 73
+  },
+  "dec256": {
+   "runs": 9,
+   "lat_mean": 73.0,
+   "lat_min": 73,
+   "lat_max": 73,
+   "latency": 73,
+   "stream_n": 8,
+   "stream_cpb": 73.0,
+   "ii": 73
+  }
+ },
+ "runs": [
+  {
+   "op": "enc128",
+   "kind": "single",
+   "starts": 1,
+   "dones": 1,
+   "blocks": 1,
+   "total": 53,
+   "lat_min": 53,
+   "lat_max": 53,
+   "lat_sum": 53,
+   "ii_min": 0,
+   "ii_max": 0
+  },
+  {
+   "op": "enc128",
+   "kind": "stream",
+   "starts": 8,
+   "dones": 8,
+   "blocks": 8,
+   "total": 424,
+   "lat_min": 53,
+   "lat_max": 53,
+   "lat_sum": 424,
+   "ii_min": 53,
+   "ii_max": 53
+  },
+  {
+   "op": "dec128",
+   "kind": "single",
+   "starts": 1,
+   "dones": 1,
+   "blocks": 1,
+   "total": 53,
+   "lat_min": 53,
+   "lat_max": 53,
+   "lat_sum": 53,
+   "ii_min": 0,
+   "ii_max": 0
+  },
+  {
+   "op": "dec128",
+   "kind": "stream",
+   "starts": 8,
+   "dones": 8,
+   "blocks": 8,
+   "total": 424,
+   "lat_min": 53,
+   "lat_max": 53,
+   "lat_sum": 424,
+   "ii_min": 53,
+   "ii_max": 53
+  },
+  {
+   "op": "enc256",
+   "kind": "single",
+   "starts": 1,
+   "dones": 1,
+   "blocks": 1,
+   "total": 73,
+   "lat_min": 73,
+   "lat_max": 73,
+   "lat_sum": 73,
+   "ii_min": 0,
+   "ii_max": 0
+  },
+  {
+   "op": "enc256",
+   "kind": "stream",
+   "starts": 8,
+   "dones": 8,
+   "blocks": 8,
+   "total": 584,
+   "lat_min": 73,
+   "lat_max": 73,
+   "lat_sum": 584,
+   "ii_min": 73,
+   "ii_max": 73
+  },
+  {
+   "op": "dec256",
+   "kind": "single",
+   "starts": 1,
+   "dones": 1,
+   "blocks": 1,
+   "total": 73,
+   "lat_min": 73,
+   "lat_max": 73,
+   "lat_sum": 73,
+   "ii_min": 0,
+   "ii_max": 0
+  },
+  {
+   "op": "dec256",
+   "kind": "stream",
+   "starts": 8,
+   "dones": 8,
+   "blocks": 8,
+   "total": 584,
+   "lat_min": 73,
+   "lat_max": 73,
+   "lat_sum": 584,
+   "ii_min": 73,
+   "ii_max": 73
+  }
+ ]
+}
